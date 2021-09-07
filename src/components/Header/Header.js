@@ -4,8 +4,11 @@ import ShoppingCartOutlinedIcon from '@material-ui/icons/AddShoppingCartOutlined
 import { Link } from 'react-router-dom'
 import LocationOnOutlinedIcon from '@material-ui/icons/LocationOnOutlined';
 import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
+import {useSelector} from 'react-redux';
 
 const Header = () => {
+     const {user} = useSelector((state) => state.data);
+
     return (
       <nav className='header'>
          <Link to='/'>
@@ -30,18 +33,24 @@ const Header = () => {
           </div>
 
           <div className='header-nav'>
-             <Link to='/login' className='header-Link'> 
+             <Link to={`${user} ? '/' : "/login"`} className='header-Link'> 
                <div className='header-option'>
-                   <span className='header-option1'>Hello Guest</span>
-                   <span className='header- option2'>Sign In</span>
+                   <span className='header-option1'>Hello, {user ? user.email: "Guest"}{""}</span>
+                   <span className='header- option2'>{user ? "Sign Out" : "Sign In"}</span>
                </div>
              </Link>  
-             <Link className='header-Link'> 
+             <Link to='/orders' className='header-Link'> 
                <div className='header-option'>
                    <span className='header-option1'>Returns</span>
                    <span className='header- option2'>& Orders</span>
                </div>
              </Link>  
+             <Link to='/login' className='header-Link'> 
+               <div className='header-option'>
+                   <span className='header-option1'>Your</span>
+                   <span className='header- option2'>Prime</span>
+               </div>
+             </Link>
              <Link to='/checkout' className='header-Link'> 
                <div className='header-basket'>
                     <ShoppingCartOutlinedIcon/>

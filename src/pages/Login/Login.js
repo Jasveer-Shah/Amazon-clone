@@ -2,14 +2,29 @@ import React, { useState } from 'react'
 import './Login.css';
 import { Link } from 'react-router-dom'
 import AmazonLogo from '../../Amazon_Logo.png';
-
+import {useSelector, useDispatch} from 'react-redux';
+import { loginInitiate } from '../../redux/action';
+import {useEffect} from 'react';
+import { useHistory } from 'react-router';
 
 const Login = () => {
 const [email, setEmail] = useState('')
 const [password, setPassword] = useState('')
 
+const {user} = useSelector((state) => state.data);
+let dispatch = useDispatch();
+let history = useHistory()
+useEffect(()=>{
+      if(user){
+          history.push('/')
+      }
+}, [user, dispatch])
+
    const signIn = (e) => {
-       e.preventDefault()
+       e.preventDefault();
+       dispatch(loginInitiate(email, password));
+       setEmail('');
+       setPassword('');
    }
     return (
         <div className='login'>
