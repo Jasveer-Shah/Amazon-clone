@@ -20,7 +20,7 @@ const BackToTop = () => {
      }
 
      useEffect(() =>{
-         window.addEventListener('scroll', toggleVisibility);
+         window.addEventListener('scroll', toggleVisibility);  // two function alternately happening
          return () => {
              window.removeEventListener('scroll', toggleVisibility);
          };

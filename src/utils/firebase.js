@@ -1,4 +1,8 @@
-import * as firebase from 'firebase';
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
+
+
 
 
 const firebaseConfig = {
@@ -10,9 +14,9 @@ const firebaseConfig = {
     appId: "1:873948234209:web:280918dc721d03941292a0"
   };
 
-  const firebaseApp = firebase.initializeApp(firebaseConfig);
-  const db = firebaseApp.firestore();
+ firebase.initializeApp(firebaseConfig);
+
   const auth = firebase.auth();
   // const provider = new firebase.auth.GoogleAuthProvider();
 
-  export {db, auth};
+  export { auth };

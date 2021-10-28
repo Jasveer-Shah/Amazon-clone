@@ -24,7 +24,7 @@ const Slider = ({bannerImages}) => {
         return () => {
            clearInterval(slider)
         }
-    }, [index]);
+    }, [index]);  // it will apply only when index is changing
 
     return (
         <div className='section'>

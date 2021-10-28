@@ -42,7 +42,7 @@ function Home() {
 
                       <div className='home-row'>
                           {products.slice(2, 5).map((item) =>(
-                              <Product 
+                              <Product                               // for each item make a Product component and pass the props 
                               key={item.id}
                               id={item.id}
                               title={item.title}
@@ -69,7 +69,10 @@ function Home() {
                           )
                           )}
                       </div>
-                      <div style={{marginTop:'40px'}}><BackToTop/></div>
+                      
+                      <div style={{marginTop:'40px'}}>
+                          <BackToTop/>
+                      </div>
 
                   </div>
             </div>

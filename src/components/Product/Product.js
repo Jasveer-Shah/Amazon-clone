@@ -3,12 +3,28 @@ import React from 'react'
 import './Product.css';
 import { Link } from 'react-router-dom'
 import { ShoppingBasketOutlined } from '@material-ui/icons';
+import { useDispatch } from 'react-redux';
+import { addToBasket } from '../../redux/action';
+
 
 const Product = ({id, title, image, price, rating, spacification, detail}) => {
+      const dispatch = useDispatch();
+      const addItemToBasket = () => {
+          const item = {
+              id, 
+              title,
+               image,
+                price,
+                 rating, 
+                 spacification,
+                  detail,
+          }
+          dispatch(addToBasket(item))
+      }
     return (
         <div className='product'>
            <div className='info'>
-               <Link to={`/products/${id}`} className='title'>
+               <Link to={`/product/${id}`} className='title'>
                    <p>{title}</p>
                </Link>
                <p className='price'>
@@ -22,7 +38,7 @@ const Product = ({id, title, image, price, rating, spacification, detail}) => {
                </div>
                </div>
                <img src={image} alt=''/>
-               <button>
+               <button onClick={addItemToBasket}>
                    <i>
                        <ShoppingBasketOutlined/>
                    </i>

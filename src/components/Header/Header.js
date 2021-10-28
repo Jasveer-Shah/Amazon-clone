@@ -4,10 +4,17 @@ import ShoppingCartOutlinedIcon from '@material-ui/icons/AddShoppingCartOutlined
 import { Link } from 'react-router-dom'
 import LocationOnOutlinedIcon from '@material-ui/icons/LocationOnOutlined';
 import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
+import { logOutInitiate } from '../../redux/action';
 
 const Header = () => {
-     const {user} = useSelector((state) => state.data);
+     const {user, basket} = useSelector((state) => state.data);
+     const dispatch = useDispatch();
+     const handleAuth = () => {
+       if(user){
+                dispatch(logOutInitiate());
+              }
+     }
 
     return (
       <nav className='header'>
@@ -34,8 +41,8 @@ const Header = () => {
 
           <div className='header-nav'>
              <Link to={`${user} ? '/' : "/login"`} className='header-Link'> 
-               <div className='header-option'>
-                   <span className='header-option1'>Hello, {user ? user.email: "Guest"}{""}</span>
+               <div onClick={handleAuth} className='header-option'>
+                   <span className='header-option1'>Hello, {user ? user.email: "Guest"}{" "}</span>
                    <span className='header- option2'>{user ? "Sign Out" : "Sign In"}</span>
                </div>
              </Link>  
@@ -54,7 +61,7 @@ const Header = () => {
              <Link to='/checkout' className='header-Link'> 
                <div className='header-basket'>
                     <ShoppingCartOutlinedIcon/>
-                    <span className='header-option2 basket-count'>0</span>
+                    <span className='header-option2 basket-count'>{basket && basket.length}</span>
                </div>
              </Link>  
           </div>

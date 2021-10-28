@@ -1,10 +1,16 @@
 import * as types from './actionTypes';
-import {auth} from '../utils/firebase';
+import { auth } from '../utils/firebase';
+
+ export const addToBasket = (item) => ({
+     type:types.ADD_TO_BASKET,
+     payload: item,
+ })
 
 const registerStart = () => ({
     type: types.REGISTER_START,
 })
 
+// once register you will recieve a user
 const registerSuccess = (user) => ({
     type: types.REGISTER_SUCCESS,
     payload: user,
@@ -34,11 +40,25 @@ const loginError = (error) => ({
     payload: error,
 })
 
+const logOutStart = () => ({
+    type: types.LOGOUT_START,
+})
+
+const logOutSuccess = () => ({
+    type: types.LOGOUT_SUCCESS,
+
+})
+
+const logOutError = (error) => ({
+    type: types.LOGOUT_FAIL,
+    payload: error,
+})
+
 export const registerInitiate = (email, password) => {
     return function(dispatch){
         dispatch(registerStart());
         auth.createUserWithEmailAndPassword(email, password)
-            .then(({user}) => {
+            .then(({ user }) => {
                 dispatch(registerSuccess(user))
             })
             .catch((error) => dispatch(registerError(error.message)));
@@ -48,10 +68,19 @@ export const registerInitiate = (email, password) => {
 export const loginInitiate = (email, password) => {
     return function(dispatch){
         dispatch(loginStart());
-        auth.createUserWithEmailAndPassword(email, password)
-            .then(({user}) => {
-                dispatch(loginSuccess(user))
+        auth.signInWithEmailAndPassword(email, password)
+            .then(({ user }) => {
+                  dispatch(loginSuccess(user))
             })
             .catch((error) => dispatch(loginError(error.message)));
+    }
+}
+
+export const logOutInitiate = () => {
+    return function (dispatch) {
+       dispatch(logOutStart());
+       auth.signOut()
+       .then((resp) => dispatch(logOutSuccess()))
+       .catch((error) =>  dispatch(logOutError(error.message)) )
     }
 }
