@@ -6,6 +6,10 @@ import { auth } from '../utils/firebase';
      payload: item,
  })
 
+ export const removeFromBasket = (id) => ({
+    type:types.REMOVE_FROM_BASKET,
+    payload: id,
+})
 const registerStart = () => ({
     type: types.REGISTER_START,
 })
@@ -52,6 +56,11 @@ const logOutSuccess = () => ({
 const logOutError = (error) => ({
     type: types.LOGOUT_FAIL,
     payload: error,
+})
+
+export const setBasketEmpty = () => ({
+    type:types.SET_BASKET_EMPTY,
+
 })
 
 export const registerInitiate = (email, password) => {

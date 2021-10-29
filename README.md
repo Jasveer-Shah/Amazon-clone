@@ -72,5 +72,13 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 npm i firebase
 npm i -g firebase-tools
 npm i react-router-dom redux react-redux redux-thunk redux-logger moment
+npm i react-currency-format
+npm i @stripe/stripe-js @stripe/react-stripe-js
+firebase logout
+firebase login
+firebase init   and install firebase cloud functions
+npm i cors
+npm i stripe
+firebase emulators:start
 
 install emojisense in vs code
