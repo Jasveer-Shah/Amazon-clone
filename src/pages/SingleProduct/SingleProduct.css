@@ -2,6 +2,7 @@
   padding: 20px;
   background-color: white;
   height: max-content;
+  
 }
 
 .single-product-ad {
@@ -14,14 +15,21 @@
   margin-bottom: 20px;
 }
 
+.singleProductRow {
+  display: flex;
+  
+}
+
 .single-product-image {
   object-fit: contain;
   width: 300px;
   height: max-content;
+  margin-right: 50px;
 }
 
 .single-product-info {
   padding-left: 20px;
+  width: 500px;
 }
 
 .single-product-title {

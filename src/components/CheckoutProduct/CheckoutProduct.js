@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import ShoppingCartOutlinedIcon from '@material-ui/icons/AddShoppingCartOutlined';
 import { removeFromBasket } from "../../redux/action"
 
-function CheckoutProduct({id, title, image, rating, price}) {
+function CheckoutProduct({id, title, image, rating, price, hideButton}) {
 
     const dispatch = useDispatch();
 
@@ -32,12 +32,14 @@ function CheckoutProduct({id, title, image, rating, price}) {
                           <p key={index}>⭐</p>
                       ))}
                   </div>
-
+                   {  !hideButton && (
                   <button onClick={removeItemFromBasket}>
                       <i><ShoppingCartOutlinedIcon/>
                          Remove from basket
                       </i>
                   </button>
+
+                   )}
               </div>
 
         </div>

@@ -77,8 +77,13 @@ npm i @stripe/stripe-js @stripe/react-stripe-js
 firebase logout
 firebase login
 firebase init   and install firebase cloud functions
+amazon-clone\functions    -- now
 npm i cors
 npm i stripe
 firebase emulators:start
+
+npm i axios
+npm i axios react-country-region-selector
+lazy loading
 
 install emojisense in vs code

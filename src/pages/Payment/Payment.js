@@ -22,9 +22,13 @@ function Payment() {
     const [clientSecret, setClientSecret] = useState(true);
 
     useEffect(()=>{
+
+        // generate the spacial strip secret which allows us to charge a customer
         const getClientSecret = async () => {
             const response = await axios({
                 method: "POST",
+
+                // Strip expects the total in a currencies subunits
                 url: `/payments/create?total=${getBasketTotal(basket) * 100}`
             })
             setClientSecret(response.data.clientSecret)
@@ -37,26 +41,33 @@ function Payment() {
     
     
     const handleSubmit = async (e) =>{
+
+        // do all the stripe stuff....
            e.preventDefault();
            setProcessing(true);
+
            const payload = await stripe.confirmCardPayment(clientSecret, {
                payment_method: {
                    card: elements.getElement(CardElement) 
                }
-           }).then(({paymentIntent}) => {
-               db.collection("users").doc(user && user.id)
-               .collection("orders").doc(paymentIntent.id)
-               .set({
-                   basket: basket,
-                   amount: paymentIntent.amount,
-                   created:paymentIntent.created,
+           }).then(({ paymentIntent }) => {
+               // paymentintent = payment confirmation
+
+                   db.collection("users")
+                       .doc(user && user.uid)
+                       .collection("orders")
+                       .doc(paymentIntent.id)
+                       .set({
+                           basket: basket,
+                           amount: paymentIntent.amount,
+                           created: paymentIntent.created,
+                       });
+                   setSucceeded(true);
+                   setError(null);
+                   setProcessing(false);
+                   dispatch(setBasketEmpty());
+                   history.replace("/orders");
                });
-               setSucceeded(true);
-               setError(null);
-               setProcessing(false);
-               dispatch(setBasketEmpty());
-               history.replace("/orders");
-           });
     }
 
 

@@ -19,7 +19,7 @@ const Register = () => {
       if(user){
          history.push('/'); 
       }
-    }, [user, dispatch])
+    }, [user, history])
 
    
     

@@ -1,15 +1,16 @@
 .header {
     height: 60px;
-    background-color: #131921;
+    background-color: #000102;
     display: flex;
     align-items: center;
     position: sticky;
     top: 0;
     z-index: 100;
+    color:white;
   }
   
   .header-logo {
-    width: 100px;
+    width: 70px;
     margin-left: 20px;
     object-fit: contain;
     margin-right: 20px;
@@ -85,6 +86,7 @@
   .header-basket {
     display: flex;
     align-items: center;
+    color:white;
   }
   
   .basket-count {

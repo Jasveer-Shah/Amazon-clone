@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './Login.css';
 import { Link } from 'react-router-dom'
-import AmazonLogo from '../../Amazon_Logo.png';
+// import AmazonLogo from '../../Amazon_Logo.png';
 import {useSelector, useDispatch} from 'react-redux';
 import { loginInitiate } from '../../redux/action';
 import {useEffect} from 'react';
@@ -18,7 +18,7 @@ useEffect(()=>{
       if(user){
           history.push('/')
       }
-}, [user, dispatch])
+}, [user, history])
 
    const signIn = (e) => {
        e.preventDefault();
@@ -29,7 +29,7 @@ useEffect(()=>{
     return (
         <div className='login'>
           <Link to='/'>
-              <img src={AmazonLogo} className='login-logo' alt='logo'/>
+              <img src="https://purepng.com/public/uploads/large/amazon-logo-s3f.png" className='login-logo' alt='logo'/>
           </Link>
           <div className='login-container'>
               <h1>Sign In</h1>

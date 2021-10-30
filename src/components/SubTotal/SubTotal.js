@@ -10,9 +10,9 @@ function SubTotal() {
     const history = useHistory();
     const handleCheckout = () => {
          if(user){
-            history.push("/payment"); 
+            history.replace("/payment"); 
          }else{
-             history.push("/login");
+             history.replace("/login");
          }
     }
 
