@@ -31,10 +31,16 @@ function Payment() {
                 // Strip expects the total in a currencies subunits
                 url: `/payments/create?total=${getBasketTotal(basket) * 100}`
             })
+            console.log(response.data)
+            
+            console.log(response.data.clientSecret)
             setClientSecret(response.data.clientSecret)
         }
         getClientSecret();
     }, [basket]);
+
+    console.log("The secret is >>>", clientSecret);
+    console.log("person", user)
 
     const stripe = useStripe();
     const elements = useElements();
@@ -51,16 +57,17 @@ function Payment() {
                    card: elements.getElement(CardElement) 
                }
            }).then(({ paymentIntent }) => {
-               // paymentintent = payment confirmation
+                     // paymentIntent = payment confirmation
+                     console.log(paymentIntent)
 
-                   db.collection("users")
-                       .doc(user && user.uid)
-                       .collection("orders")
-                       .doc(paymentIntent.id)
+                   db.collection('users')
+                       .doc(user?.uid)
+                       .collection('orders')
+                       .doc(paymentIntent.id) // as order id
                        .set({
                            basket: basket,
                            amount: paymentIntent.amount,
-                           created: paymentIntent.created,
+                           created: paymentIntent.created,  // it gives us time stamp
                        });
                    setSucceeded(true);
                    setError(null);

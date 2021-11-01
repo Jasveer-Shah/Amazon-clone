@@ -4,6 +4,7 @@ const cors = require("cors");
 
 const stripe = require("stripe")("sk_test_51HQ1oqB0Z0nVhfUaLJl1vtOUgXDRonzKcZ6w42SPnSIOvJujPZnAEaYuKQLbesTg0LzKmzFgzPBKedOJ7qQX5Cuy006I2akPp1")
                                   // secret key
+                                  console.log(stripe);
 const app = express();
 app.use(cors({origin: true}));
 app.use(express.json());
@@ -18,7 +19,7 @@ app.get("/", (req, res)=>
      const total = req.query.total;
 
      console.log("Payment Request Recieved wow!!! for this amount >>> ", total);
-     
+
      const paymentIntent = await stripe.paymentIntents.create({
          amount: total,
          currency: "usd",
@@ -29,6 +30,7 @@ app.get("/", (req, res)=>
      })
  })    
 
+ //http://localhost:5001/clone-9f3d0/us-central1/api
  //http://localhost:5001/clone-9f3d0/us-central1/api
      exports.api = functions.https.onRequest(app);
 // // Create and Deploy Your First Cloud Functions
